@@ -1,0 +1,13 @@
+
+# daemon node launch
+docker run -d -t --name spark-master --network spark-network -p 9999:8080 donkanmcleod/spark-base
+
+docker exec spark-master start-master
+
+
+# interactive node lauch
+docker run -it --name spark-master --network spark-network donkanmcleod/spark-base -p 9999:8080 
+
+# to start spark master node type: start-master at home promt
+
+

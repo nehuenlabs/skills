@@ -1,0 +1,32 @@
+## use Debian latest version
+FROM debian:latest
+LABEL maintainer=marcelo.ivan.rojas.hernandez@gmail.com
+
+## initial directory
+workdir /home/
+
+## install necessary packages
+RUN apt-get update && apt-get install -y curl vim wget software-properties-common ssh net-tools 
+RUN apt-get install -y python3 python3-pip python3-numpy python3-matplotlib python3-scipy python3-pandas
+#RUN apt-get install -y python3-simpy
+
+## set python3 as default 
+RUN update-alternatives --install "/usr/bin/python" "python" "$(which python3)" 1
+
+## move files from download ../download directory at the host to /home in the container
+COPY download/spark33-hadoop3.tgz /home/
+COPY download/openjdk17-linux.tar.gz /home/
+
+## configure java jdk 17
+RUN tar -zxf openjdk17-linux.tar.gz -C /usr/local/
+RUN rm openjdk17-linux.tar.gz 
+RUN update-alternatives --install "/usr/bin/java"   "java"   "/usr/local/jdk-17/bin/java"  1
+RUN update-alternatives --install "/usr/bin/javac"  "javac"  "/usr/local/jdk-17/bin/javac" 1
+
+ENV JAVA_HONE="/usr/local/jdk-17"
+
+## configure spark
+RUN tar -zxf spark33-hadoop3.tgz 
+
+
+

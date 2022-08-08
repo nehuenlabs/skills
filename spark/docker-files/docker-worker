@@ -1,0 +1,16 @@
+
+# daemon node launch
+docker run -d -t --name spark-worker-001 --network spark-network -p 9001:8080 donkanmcleod/spark-base
+docker run -d -t --name spark-worker-002 --network spark-network -p 9002:8080 donkanmcleod/spark-base
+docker run -d -t --name spark-worker-003 --network spark-network -p 9003:8080 donkanmcleod/spark-base
+
+docker exec spark-worker-001 start-worker spark://master:7077
+docker exec spark-worker-002 start-worker spark://master:7077
+docker exec spark-worker-003 start-worker spark://master:7077
+
+
+# interactive node lauch
+docker run -it --name spark-worker-XXX --network spark-network donkanmcleod/spark-base 
+
+
+

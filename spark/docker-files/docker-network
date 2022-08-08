@@ -1,0 +1,4 @@
+
+# docker network creation
+docker network create --driver bridge spark-network
+
