@@ -1,2 +1,4 @@
 # Place here your ignoring files
 
+.idea
+*.iml
